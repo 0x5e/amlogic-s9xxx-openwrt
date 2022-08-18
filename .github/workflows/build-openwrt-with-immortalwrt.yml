@@ -74,7 +74,7 @@ jobs:
 
     steps:
       - name: Print parameters
-        id: print parameters
+        id: print
         run: |
           echo "openwrt_soc: ${{ github.event.inputs.openwrt_soc }}"
           echo "openwrt_kernel: ${{ github.event.inputs.openwrt_kernel }}"
