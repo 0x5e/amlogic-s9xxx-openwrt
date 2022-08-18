@@ -90,20 +90,6 @@ jobs:
           sudo timedatectl set-timezone "${TZ}"
           echo "::set-output name=status::success"
 
-      - name: Download OpenWrt Armvirt firmware
-        id: down
-        if: (!cancelled())
-        run: |
-          openwrt_url="$(curl -s "https://api.github.com/repos/${GITHUB_REPOSITORY}/releases" | grep -o "OpenWrt_.*${{ github.event.inputs.branch }}.*/.*rootfs.tar.gz" | head -n 1)"
-          [[ -z "${openwrt_url}" ]] && echo -e "OpenWrt file not found!" && exit 1
-          #
-          armvirt_tarfile_path="openwrt/bin/targets/armvirt/64"
-          [[ -d "${armvirt_tarfile_path}" ]] || mkdir -p ${armvirt_tarfile_path}
-          #
-          wget -q -P "${armvirt_tarfile_path}" "https://github.com/${GITHUB_REPOSITORY}/releases/download/${openwrt_url}"
-          [[ "${?}" -ne "0" ]] && echo "The armvirt file download failed!" && exit 1
-          echo "::set-output name=status::success"
-
       - name: Build OpenWrt firmware
         if: steps.down.outputs.status == 'success' && !cancelled()
         uses: ophub/amlogic-s9xxx-openwrt@main
