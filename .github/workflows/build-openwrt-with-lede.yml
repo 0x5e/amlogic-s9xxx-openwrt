@@ -73,6 +73,14 @@ jobs:
     if: github.event.repository.owner.id == github.event.sender.id
 
     steps:
+      - name: Print parameters
+        id: print parameters
+        run: |
+          echo "openwrt_soc: ${{ github.event.inputs.openwrt_soc }}"
+          echo "openwrt_kernel: ${{ github.event.inputs.openwrt_kernel }}"
+          echo "auto_kernel: ${{ github.event.inputs.auto_kernel }}"
+          echo "openwrt_size: ${{ github.event.inputs.openwrt_size }}"
+          echo "::set-output name=status::success"
       - name: Checkout
         uses: actions/checkout@v2
 
