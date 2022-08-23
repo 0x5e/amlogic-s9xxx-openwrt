@@ -62,8 +62,8 @@ download_imagebuilder() {
     [[ "${?}" -eq "0" ]] || error_msg "Wget download failed: [ ${download_file} ]"
 
     # Unzip and change the directory name
-    tar -xJf openwrt-imagebuilder-* && sync && rm -f openwrt-imagebuilder-*.tar.xz
-    mv -f openwrt-imagebuilder-* openwrt
+    tar -xJf immortalwrt-imagebuilder-* && sync && rm -f immortalwrt-imagebuilder-*.tar.xz
+    mv -f immortalwrt-imagebuilder-* openwrt
 
     sync && sleep 3
     echo -e "${INFO} [ ${make_path} ] directory status: $(ls . -l 2>/dev/null)"
